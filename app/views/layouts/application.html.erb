@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ForumApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%# <link rel="stylesheet" href="application.scss"> %>
+    <%# <%= stylesheet_link_tag "application.scss", media: "all", "data-turbo-track": "reload" %> 
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= turbo_include_tags %>
+
+    <%# <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>  
+
+    <%= javascript_importmap_tags %>
+
+  <body>
+    <body class="<%= controller.controller_name == 'home' && action_name == 'index' ? 'home' : '' %>">
+     <div id="notifications">
+      <% if user_signed_in? %>
+        <%= render 'notifications/notifications' %>
+      <% end %>
+    </div>
+
+    <div class="background-container">
+      <nav class="navbar">
+        
+        <div class="nav-container">
+          <%# <%= link_to "Home", root_path, class: "nav-link" %> 
+
+          <% if user_signed_in? %>
+          <a href="<%= notifications_path %>">🔔 Notifications (<%= current_user.notifications.unread.count %>)</a>
+            <span class="nav-text">Signed in as: <%= current_user.email %></span>
+            <%= link_to "Profile", user_path(current_user), class: "nav-link" %>
+
+            <% if current_user.admin? %>
+              <%= link_to "Admin Dashboard", admin_dashboard_path, class: "nav-link admin" %>
+            <% elsif current_user.moderator? %>
+              <%= link_to "Moderator Panel", moderator_dashboard_path, class: "nav-link moderator" %> 
+            <% end %>
+
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-button logout" %>
+          <% else %>
+            <%# <%= link_to "Login", new_user_session_path, class: "nav-link" %> 
+            <%# <%= link_to "Sign Up", new_user_registration_path, class: "nav-link signup" %> 
+
+     <%# <%= link_to "Login", new_user_session_path, class: "btn btn-primary custom-btn" %> 
+          <%# <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success custom-btn" %> 
+        
+        
+         </div>
+      </div>
+              
+          <% end %>
+        </div>
+      </nav>
+
+      <!-- Welcome Section -->
+    <% if request.path == "/" && !user_signed_in? %>
+        <div class="welcome-container">
+        
+         <h1 class="welcome-title">Welcome to the <strong>Collaborative Discussion Forum</strong></h1>  
+      
+        <h2 class="welcome-subtitle"><strong>Join discussions, share ideas, and connect with like-minded individuals.</strong></h2> 
+
+        <div class="auth-buttons">
+     <%= link_to "Login", new_user_session_path, class: "btn btn-primary custom-btn" %> 
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success custom-btn" %> 
+        
+        
+         </div>
+      </div>
+    <div id="notifications">
+  <%= render @notifications %>
+</div>
+
+    <% end %>
+      <%= yield %>
+    </div>
+
+     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </body>
+</html>
+
+

@@ -1,0 +1,29 @@
+<!--<h1>Notifications</h1>
+
+🔔 <a href="<%= notifications_path %>">Notifications (<%= @unread_count %>)</a>
+
+<ul>
+  <% if @notifications.any? %>
+    <% @notifications.each do |notification| %>
+      <li>
+        <%= notification.message.present? ? notification.message : "No message content" %>
+        |
+        <%# <%= button_to "Mark as Read", mark_as_read_notification_path(notification), method: :patch, data: { turbo: false }, class: "btn btn-sm btn-primary" %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>No new notifications.</li>
+  <% end %>
+</ul>
+
+-->
+
+
+
+<div id="notifications">
+  <% if @notifications.present? %>
+    <%= render @notifications %>
+  <% else %>
+    <p>No notifications</p>
+  <% end %>
+</div>

@@ -1,0 +1,37 @@
+
+
+<h1>New Discussion Thread</h1>
+
+<%= form_with model: @thread, local: true do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Enter title" %>
+  </div>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body, class: "form-control", placeholder: "Write your thread content..." %>
+  </div>
+
+  <div>
+    <%= form.label :tag_list, "Tags (comma-separated)" %><br>
+    <%= form.text_field :tag_list, placeholder: "e.g. Ruby, Rails, PostgreSQL" %>
+  </div>
+
+  <div class="field">
+  <%= form.label :category_id, "Category" %>
+  <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "Select a category" %>
+</div>
+
+
+  <div class="field">
+    <%= form.label :parent_id, "Reply To (Optional)" %>
+    <%= form.collection_select :parent_id, DiscussionThread.all, :id, :title, include_blank: "None" %>
+  </div>
+
+  <div>
+    <%= form.submit "Create Thread", class: "btn btn-success" %>
+  </div>
+<% end %>
+
+<%= link_to "Back to Threads", discussion_threads_path, class: "btn btn-secondary" %>

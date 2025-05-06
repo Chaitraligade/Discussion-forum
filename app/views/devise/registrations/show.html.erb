@@ -1,0 +1,14 @@
+<h2>Profile</h2>
+
+<p><strong>Email:</strong> <%= resource.email %></p>
+
+<% if resource.bio.present? %>
+  <p><strong>Bio:</strong> <%= resource.bio %></p>
+<% end %>
+
+<% if resource.profile_photo.attached? %>
+  <p><strong>Profile Photo:</strong></p>
+  <%= image_tag resource.profile_photo, width: 150 %>
+<% end %>
+<%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-warning" %>
+<hr>

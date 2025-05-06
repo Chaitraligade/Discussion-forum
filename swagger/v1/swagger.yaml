@@ -1,0 +1,181 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/admin/users":
+    get:
+      summary: Retrieve all admin users
+      tags:
+      - Admin Users
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Admin users retrieved
+  "/api/v1/users/{user_id}/discussion_threads":
+    get:
+      summary: List discussion threads
+      tags:
+      - Discussion Threads
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Threads listed successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    body:
+                      type: string
+                    created_at:
+                      type: string
+                  required:
+                  - id
+                  - title
+                  - body
+                  - created_at
+    post:
+      summary: Create a discussion thread
+      tags:
+      - Discussion Threads
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: Thread created successfully
+        '422':
+          description: Invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+              required:
+              - title
+              - body
+  "/api/v1/moderator/users":
+    get:
+      summary: Retrieve all moderator users
+      tags:
+      - Moderator Users
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Moderator users retrieved
+        '401':
+          description: Unauthorized
+  "/api/v1/sessions":
+    post:
+      summary: User Login
+      tags:
+      - User Sessions
+      parameters: []
+      responses:
+        '200':
+          description: User logged in
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  example: password123
+              required:
+              - email
+              - password
+  "/api/v1/users/profile":
+    get:
+      summary: Fetch user profile
+      tags:
+      - Users
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved successfully
+  "/api/v1/users/update":
+    put:
+      summary: Update user details
+      tags:
+      - Users
+      security:
+      - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: User updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+              required:
+              - name
+              - email
+  "/api/v1/users/change_password":
+    put:
+      summary: Change user password
+      tags:
+      - Users
+      security:
+      - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: Password changed successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_password:
+                  type: string
+                new_password:
+                  type: string
+              required:
+              - current_password
+              - new_password
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

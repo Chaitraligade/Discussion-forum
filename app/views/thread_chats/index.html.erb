@@ -1,0 +1,15 @@
+<h1>Live Chat</h1>
+<ul>
+  <% @threads.each do |thread| %>
+    <li>
+      <strong><%= thread.user&.username || "Anonymous" %>:</strong> 
+      <%= thread.title %>
+
+    </li>
+  <% end %>
+</ul>
+
+<%= form_with model: ThreadChat.new, url: thread_chats_path, local: true do |form| %>
+  <%= form.text_field :title, placeholder: "send message" %>
+  <%= form.submit "Submit" %>
+<% end %>

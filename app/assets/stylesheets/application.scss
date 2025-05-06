@@ -1,0 +1,375 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+/* General Reset */
+// @import "bootstrap/scss/bootstrap"; // Bootstrap
+@import "custom_styles"; // Custom styles (make sure this file exists)
+
+@import "bootstrap"; // (if using Bootstrap)
+// @import "custom_styles"; // (replace with your actual styles)
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background Gradient - Blue to Pink */
+/* Background Gradient - Pink to Yellow */
+html, body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff6bcb, #fff4a3); /* Pink to Soft Yellow */
+}
+
+/* Wrapper for Centering */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Login Box */
+.login-box {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-width: 90%;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Title */
+.login-box h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Subtitle */
+.subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+/* Inputs */
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Remember Me & Forgot Password */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.remember-me {
+  color: #444;
+}
+
+.forgot-password {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Submit Button */
+.btn-login {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background: #667eea;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+  background: #5563c1;
+}
+
+/* Sign Up Link */
+.signup-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.signup-text a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 1.5rem;
+  }
+}
+.page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.content-box {
+  background: rgba(255, 255, 255, 0.8); /* optional: for readability over gradients */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Background Styling */
+.full-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  padding: 20px;
+}
+
+/* Discussion Container */
+.discussion-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Page Title */
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+/* Filter & Search Section */
+.filter-search-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filter-form, .search-form {
+  display: flex;
+  gap: 5px;
+}
+
+.dropdown, .search-box {
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.dropdown:focus, .search-box:focus {
+  border-color: #ff758c;
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  background: #333;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #555;
+}
+
+/* Sort & New Thread Buttons */
+.sort-new-thread {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.btn-sort {
+  background: #007bff;
+}
+
+.btn-sort:hover {
+  background: #0056b3;
+}
+
+.btn-new-thread {
+  background: #28a745;
+}
+
+.btn-new-thread:hover {
+  background: #218838;
+}
+
+/* Threads Grid */
+.threads-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.thread-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.thread-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff758c;
+  text-decoration: none;
+}
+
+.thread-title:hover {
+  text-decoration: underline;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .discussion-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .filter-search-group {
+    flex-direction: column;
+  }
+
+  .sort-new-thread {
+    flex-direction: column;
+  }
+}
+/* Change thread card background to black */
+.thread-card {
+  background-color: #000; /* Black color */
+  color: white; /* Ensure text is visible */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.thread-card:hover {
+  transform: scale(1.03);
+}
+
+.top-nav {
+  position: fixed;    /* Stays at the top of the page */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #333;   /* Dark background */
+  color: white;             /* White text for contrast */
+  display: flex;
+  align-items: center;
+  padding: 0 20px;          /* Spacing on left/right */
+  z-index: 9999;            /* On top of everything */
+}
+
+.nav-user {
+  margin-right: 20px;
+}
+
+.nav-link {
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Push the main content below the fixed nav */
+body {
+  margin: 0;
+  padding-top: 50px; /* Same as .top-nav height */
+}

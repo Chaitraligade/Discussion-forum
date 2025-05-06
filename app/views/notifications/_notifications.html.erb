@@ -1,0 +1,25 @@
+<!--<div class="notifications">
+  <% if user_signed_in? %>  <%# ✅ Check if user is logged in %>
+    <% if current_user.notifications.any? %>
+      <ul>
+        <% current_user.notifications.unread.each do |notification| %>
+          <li>
+            <%= notification.message %>
+            
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <%# <p>No new notifications.</p> %>
+    <% end %>
+  <% end %> <%# ✅ End check for logged-in user %>
+</div>
+-->
+
+
+<% @notifications.each do |notification| %>
+  <div class="notification">
+    <p><%= notification.message %></p>
+  </div>
+<% end %>
+

@@ -1,0 +1,34 @@
+<h1>Moderator Dashboard</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Bio</th>
+    <th>Username</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.email %></td>
+      <td><%= user.role %></td>
+      <td><%= user.bio.present? ? user.bio : 'N/A' %></td>
+      <td><%= user.username.present? ? user.username : 'N/A' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Recent Discussion Threads</h2>
+<ul>
+  <% @discussion_threads.each do |thread| %>
+    <li><%= link_to thread.title, discussion_thread_path(thread) %> (Created: <%= thread.created_at.strftime("%Y-%m-%d") %>)</li>
+  <% end %>
+</ul>
+
+<h2>Recent Comments</h2>
+<ul>
+  <% @comments.each do |comment| %>
+    <li><%= comment.body %> (By: <%= comment.user.email %>)</li>
+  <% end %>
+</ul>

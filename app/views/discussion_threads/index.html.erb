@@ -1,0 +1,45 @@
+<% if user_signed_in? %>
+  <div class="fixed-header">
+    <div class="discussion-container">
+      <h1 class="page-title">Discussion Threads</h1>
+
+      <!-- Category Filter & Search -->
+      <div class="filter-search-group">
+        <%= form_with url: discussion_threads_path, method: :get, local: true, class: "filter-form" do %>
+          <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: "All Categories", class: "dropdown" %>
+          <%= submit_tag "Filter", class: "btn" %>
+        <% end %>
+
+        <%= form_with url: discussion_threads_path, method: :get, local: true, class: "search-form" do %>
+          <%= text_field_tag :query, params[:query], placeholder: "Enter keywords...", class: "search-box" %>
+          <%= submit_tag "Search", class: "btn" %>
+        <% end %>
+      </div>
+
+      <!-- Sort & New Thread -->
+      <div class="sort-new-thread">
+        <%= link_to "Newest First", discussion_threads_path(sort: "newest"), class: "btn btn-sort" %>
+        <%= link_to "Oldest First", discussion_threads_path(sort: "oldest"), class: "btn btn-sort" %>
+        <%= link_to "New Thread", new_discussion_thread_path, class: "btn btn-new-thread" %>
+      </div>
+
+      <!-- Threads -->
+      <% if @threads.present? %>
+        <div class="threads-grid">
+          <% @threads.each_with_index do |thread, index| %>
+            <div class="thread-card thread-color-<%= index % 5 %>">
+              <h2><%= link_to thread.title, discussion_thread_path(thread), class: "thread-title" %></h2>
+              <p><%= thread.body.truncate(100) %></p>
+              <small>Posted by <%= thread.user.username %> | <%= thread.created_at.strftime("%b %d, %Y") %></small>
+            </div>
+          <% end %>
+        </div>
+        <div class="pagination">
+          <%= paginate @threads %>
+        </div>
+      <% else %>
+        <p>No threads available.</p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

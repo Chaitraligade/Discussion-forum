@@ -1,0 +1,68 @@
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <!-- Thread Header -->
+    <h1 class="text-primary"><%= @thread.title %></h1>
+    <p class="lead"><%= @thread.body %></p>
+
+    <!-- Tags Section -->
+    <p><strong>Tags:</strong> 
+      <% if @thread.tag_list.any? %>
+        <span class="badge bg-info text-dark"><%= @thread.tag_list.join(", ") %></span>
+      <% else %>
+        <span class="text-muted">No tags available.</span>
+      <% end %>
+    </p>
+
+    <!-- Display Subtopics -->
+    <h3 class="mt-4">Subtopics</h3>
+    <% if @thread.subthreads.any? %>
+      <ul class="list-group">
+        <% @thread.subthreads.each do |subthread| %>
+          <li class="list-group-item">
+            <h4>
+              <% @thread.files.each do |file| %>
+  <p>📁 <%= link_to file.filename, url_for(file) %></p>
+<% end %>
+
+              <%= link_to subthread.title, discussion_thread_path(subthread), class: "text-decoration-none text-primary" %>
+            </h4>
+            <p><%= subthread.body.truncate(100) %></p>
+            <small class="text-muted">
+              Posted by <%= subthread.user.username %> | <%= subthread.created_at.strftime("%b %d, %Y") %>
+            </small>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No subtopics available.</p>
+    <% end %>
+
+    <!-- Create a Subtopic Button -->
+    <%= link_to "Create a Subtopic", new_discussion_thread_path(parent_id: @thread.id), class: "btn btn-success mt-3" %>
+
+    <!-- Comments Section -->
+    <h3 class="mt-4">Comments</h3>
+    <% if @thread.comments.any? %>
+      <ul class="list-group">
+        <% @thread.comments.each do |comment| %>
+          <li class="list-group-item">
+            <%= comment.body %>
+            <small class="text-muted d-block">by <%= comment.user.username %></small>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No comments yet.</p>
+    <% end %>
+
+    <!-- Add a Comment Form -->
+    <h3 class="mt-4">Add a Comment</h3>
+    <%= form_with model: [@thread, @comment], local: true, class: "mt-3" do |form| %>
+      <div class="mb-3">
+        <%= form.text_area :body, placeholder: "Write a comment...", class: "form-control" %>
+      </div>
+      <%= form.submit "Post Comment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
